@@ -18,7 +18,8 @@
   },
   "homepage": "https://github.com/ismaidw/inf21-dw1-g07#readme",
   "dependencies": {
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "mysql": "^2.18.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
