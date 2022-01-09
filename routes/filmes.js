@@ -58,6 +58,30 @@ router.post('/', jsonParser, (req, res, next) => {
     });
 });
 
+router.put('/', jsonParser, (req, res, next) => {    
+    mysql.getConnection((error, conn) => {
+        if (error) {
+            return res.status(500).send({ error: error });
+        }
+        conn.query(
+            `UPDATE filmes 
+                SET title          = ?, 
+                    release_year   = ?, 
+                    language       = ?, 
+                    lenght         = ?, 
+                    rating         = ?   
+                    WHERE filme_id = ?`, [req.body.title, req.body.release_year, req.body.language, req.body.lenght, req.body.rating, req.body.filme_id],
+            (error, result, fields) => {
+                conn.release();
+                if (error) {
+                    return res.status(500).send({ error: error, response: null });
+                }
+                return res.status(201).send({ mensagem: "Filme atualizado com sucesso" });
+            }
+        )
+    });
+});
+
 router.delete('/:id_filme', (req, res, next) => {
     const id = req.params.id_filme;
     mysql.getConnection((error, conn) => {
