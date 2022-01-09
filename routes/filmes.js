@@ -6,7 +6,6 @@ const mysql = require('../mysql').pool;
 const jsonParser = bodyParser.json();
 
 router.get('/', (req, res, next) => {
-
     mysql.getConnection((error, conn) => {
         if (error) {
             return res.status(500).send({ error: error });
@@ -21,12 +20,10 @@ router.get('/', (req, res, next) => {
             }
         )
     });
-
 });
 
 router.get('/:id_filme', (req, res, next) => {
     const id = req.params.id_filme;
-
     mysql.getConnection((error, conn) => {
         if (error) {
             return res.status(500).send({ error: error });
@@ -55,17 +52,27 @@ router.post('/', jsonParser, (req, res, next) => {
                 if (error) {
                     return res.status(500).send({ error: error, response: null });
                 }
-                return res.status(201).send({ mensagem: "Filme inserido com sucesso" });
+                return res.status(202).send({ mensagem: "Filme inserido com sucesso" });
             }
         )
     });
-
 });
 
-
-router.delete('/', (req, res, next) => {
-    res.status(201).send({
-        mensagem: 'Utilização do DELETE em uma rota de filmes'
+router.delete('/:id_filme', (req, res, next) => {
+    const id = req.params.id_filme;
+    mysql.getConnection((error, conn) => {
+        if (error) {
+            return res.status(500).send({ error: error });
+        }
+        conn.query(
+            `DELETE FROM filmes WHERE filme_id = ?`, [id],
+            (error, result, fields) => {
+                if (error) {
+                    return res.status(500).send({ error: error });
+                }
+                return res.status(202).send({mensagem: "Filme removido com sucesso" });
+            }
+        )
     });
 });
 
