@@ -12,14 +12,14 @@ const jsonParser = bodyParser.json();
  *     Filmes:
  *       type: object
  *       required:
- *         - filme_id
+ *         - id
  *         - title
  *         - release_year
  *         - language
  *         - lenght
  *         - rating 
  *       properties:
- *         filme_id:
+ *         id:
  *           type: int
  *           description: Id do filme
  *         title:
@@ -78,7 +78,7 @@ router.get('/', (req, res, next) => {
             return res.status(500).send({ error: error });
         }
         conn.query(
-            'SELECT * FROM filmes;',
+            'SELECT * FROM Filme;',
             (error, result, fields) => {
                 if (error) {
                     return res.status(500).send({ error: error });
@@ -123,7 +123,7 @@ router.get('/:id_filme', (req, res, next) => {
             return res.status(500).send({ error: error });
         }
         conn.query(
-            'SELECT * FROM filmes WHERE filme_id = ?;', [id],
+            'SELECT * FROM Filme WHERE id = ?;', [id],
             (error, result, fields) => {
                 console.log(result.length);
                 if (error) {
@@ -169,7 +169,7 @@ router.post('/', jsonParser, (req, res, next) => {
             return res.status(500).send({ error: error });
         }
         conn.query(
-            'INSERT INTO filmes (filme_id, title, release_year, language, lenght, rating) VALUES (?, ?, ?, ?, ?, ?);', [req.body.filme_id, req.body.title, req.body.release_year, req.body.language, req.body.lenght, req.body.rating],
+            'INSERT INTO Filme (id, title, release_year, language, lenght, rating) VALUES (?, ?, ?, ?, ?, ?);', [req.body.filme_id, req.body.title, req.body.release_year, req.body.language, req.body.lenght, req.body.rating],
             (error, result, fields) => {
                 conn.release();
                 if (error) {
@@ -212,13 +212,13 @@ router.put('/', jsonParser, (req, res, next) => {
             return res.status(500).send({ error: error });
         }
         conn.query(
-            `UPDATE filmes 
+            `UPDATE Filme 
                 SET title          = ?, 
                     release_year   = ?, 
                     language       = ?, 
                     lenght         = ?, 
                     rating         = ?   
-                    WHERE filme_id = ?`, [req.body.title, req.body.release_year, req.body.language, req.body.lenght, req.body.rating, req.body.filme_id],
+                    WHERE id = ?`, [req.body.title, req.body.release_year, req.body.language, req.body.lenght, req.body.rating, req.body.id],
             (error, result, fields) => {
                 conn.release();
                 if (error) {
@@ -263,7 +263,7 @@ router.delete('/:id_filme', (req, res, next) => {
             return res.status(500).send({ error: error });
         }
         conn.query(
-            `DELETE FROM filmes WHERE filme_id = ?`, [id],
+            `DELETE FROM Filme WHERE id = ?`, [id],
             (error, result, fields) => {
                 if (error) {
                     return res.status(500).send({ error: error });
