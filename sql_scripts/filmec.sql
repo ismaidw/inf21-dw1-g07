@@ -42,7 +42,7 @@ INSERT INTO Filme (id,title,release_Year,language,lenght,rating) VALUES (30,'The
 create table Receita(id int primary key,
 					 pais varchar(70),
                      valor int,
-                     filmeId,
+                     filmeId int,
                      FOREIGN KEY (filmeId) REFERENCES Filme(id)
                      );
 
