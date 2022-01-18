@@ -39,7 +39,7 @@ INSERT INTO Filme (id,title,release_Year,language,lenght,rating) VALUES (28,'Int
 INSERT INTO Filme (id,title,release_Year,language,lenght,rating) VALUES (29,'Sen to Chihiro no kamikakushi',2001,'Japonês',125,8.6);
 INSERT INTO Filme (id,title,release_Year,language,lenght,rating) VALUES (30,'The Green Mile',1999,'Inglês',189,8.6);
 
-create table Filme(id int primary key,
+create table Receita(id int primary key,
 					 pais varchar(70),
                      valor int,
                      filmeId,
