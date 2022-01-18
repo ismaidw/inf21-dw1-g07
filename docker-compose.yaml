@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   mysql:
-    container_name: mysql_test
+    container_name: filme-mysql
     image: meloana/inf21dw1g07:mysql
     command: --default-authentication-plugin=mysql_native_password
     restart: always
