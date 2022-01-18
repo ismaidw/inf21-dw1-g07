@@ -43,7 +43,7 @@ create table Filme(id int primary key,
 					 pais varchar(70),
                      valor int,
                      filmeId,
-                     FOREING KEY (filmeId) REFERENCES Filme(id)
+                     FOREIGN KEY (filmeId) REFERENCES Filme(id)
                      );
 
 INSERT INTO Receita (id, pais, valor, filmeId) VALUES (1, 'USA', 100000, 1);
